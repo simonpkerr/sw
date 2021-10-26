@@ -1,12 +1,31 @@
-import api from '.';
+import axios from 'axios';
+import { findCharacters } from '.';
 
 jest.mock('axios');
 describe('API', () => {
   describe('findCharacters', () => {
-    it('should call the correct endpoint and return characters', () => {});
+    beforeEach(() => {
+      // @ts-ignore
+      axios.get.mockResolvedValue({
+        data: { results: [{ name: 'Luke Skywalker' }] },
+      });
+    });
 
-    it('should accept a page number', () => {});
+    it('should call the correct endpoint and return characters', () => {
+      findCharacters();
+      expect(axios.get).toBeCalledWith('https://swapi.dev/api/people/?page=1');
+    });
 
-    it('should accept a search parameter', () => {});
+    it('should accept a page number', () => {
+      findCharacters({ page: 2 });
+      expect(axios.get).toBeCalledWith('https://swapi.dev/api/people/?page=2');
+    });
+
+    it('should accept a search parameter', () => {
+      findCharacters({ searchParam: 'luke' });
+      expect(axios.get).toBeCalledWith(
+        'https://swapi.dev/api/people/?page=1&search=luke',
+      );
+    });
   });
 });
