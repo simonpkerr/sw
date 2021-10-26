@@ -32,13 +32,11 @@ describe('List', () => {
     expect(api.findCharacters).toBeCalledWith({ page: 1 });
   });
 
-  it('should search for specific characters', async () => {
+  it('should search for specific characters', () => {
     fireEvent.change(screen.getByLabelText('Search'), {
       target: { value: 'luke' },
     });
     userEvent.click(screen.getByText('Search by name'));
     expect(api.findCharacters).toBeCalledWith({ page: 1, searchParam: 'luke' });
-
-    // await waitFor(() => screen.getByText('next'));
   });
 });

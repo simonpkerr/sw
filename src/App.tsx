@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import Details from './Details';
 import Favourites from './Favourites';
 import List from './List';
 
@@ -18,6 +19,7 @@ function App() {
           <Route path='/favourites'>
             <Favourites />
           </Route>
+          <Route path='/details' component={Details} />
         </Switch>
       </main>
     </BrowserRouter>

@@ -20,3 +20,13 @@ export const findHomeworld = async (url: string) => {
   const response = await axios.get(url);
   return response.data;
 };
+
+export const findFilms = async (urls: string[]) => {
+  const response = await Promise.all(urls.map((url) => axios.get(url)));
+  return response.map((r) => r.data.title);
+};
+
+export const findStarships = async (urls: string[]) => {
+  const response = await Promise.all(urls.map((url) => axios.get(url)));
+  return response.map((r) => r.data.name);
+};

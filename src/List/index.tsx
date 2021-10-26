@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { findCharacters, findHomeworld } from '../api';
 
 const ListItem = ({ character }: { character: any }) => {
@@ -14,7 +15,19 @@ const ListItem = ({ character }: { character: any }) => {
 
   return homeworld !== null ? (
     <li>
-      <h3>{character.name}</h3>
+      <h3>
+        <Link
+          to={{
+            pathname: '/details',
+            search: `?character=${String(character.name)
+              .replace(' ', '')
+              .toLowerCase()}`,
+            state: { ...character, homeworld },
+          }}
+        >
+          {character.name}
+        </Link>
+      </h3>
       <p>Gender: {character.gender}</p>
       <p>Home planet: {homeworld}</p>
     </li>
