@@ -39,5 +39,8 @@ exports[`Details should show the character details, films and starships passed f
       starship 1
     </li>
   </ul>
+  <button>
+    Add to favourites
+  </button>
 </div>
 `;

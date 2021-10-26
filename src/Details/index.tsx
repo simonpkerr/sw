@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { findFilms, findStarships } from '../api';
 
 type DetailsProps = { films: null | string[]; starships: null | string[] };
-const Details = ({ location }: any) => {
+const Details = ({ location, favourites, setFavourites }: any) => {
   const [characterDetails, setCharacterDetails] = useState<DetailsProps>({
     films: null,
     starships: null,
@@ -21,8 +21,22 @@ const Details = ({ location }: any) => {
 
     getDetails();
   }, [location]);
-
   const character = location?.state;
+
+  const addToFavourites = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const favourite = {
+      name: character.name,
+      height: character.height,
+      gender: character.gender,
+      homeworld: character.homeworld,
+    };
+    // should check here first to see if item already added
+
+    const newFavourites = [...favourites];
+    newFavourites.push(favourite);
+    setFavourites(newFavourites);
+  };
 
   return character ? (
     <>
@@ -53,6 +67,7 @@ const Details = ({ location }: any) => {
           </ul>
         </>
       )}
+      <button onClick={addToFavourites}>Add to favourites</button>
     </>
   ) : null;
 };

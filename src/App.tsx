@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import Details from './Details';
 import Favourites from './Favourites';
 import List from './List';
 
 function App() {
+  const [favourites, setFavourites] = useState([]);
   return (
     <BrowserRouter>
       <nav>
@@ -17,9 +18,18 @@ function App() {
             <List />
           </Route>
           <Route path='/favourites'>
-            <Favourites />
+            <Favourites favourites={favourites} />
           </Route>
-          <Route path='/details' component={Details} />
+          <Route
+            path='/details'
+            component={(props: any) => (
+              <Details
+                {...props}
+                favourites={favourites}
+                setFavourites={setFavourites}
+              />
+            )}
+          />
         </Switch>
       </main>
     </BrowserRouter>
