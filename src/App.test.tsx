@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 it('should render the list component by default', () => {
   render(<App />);
-  expect(screen.getByText('List')).toBeInTheDocument();
+  expect(screen.getByText('Star Wars Characters')).toBeInTheDocument();
 });
 
 it('should render the favourites page when navigated to', () => {

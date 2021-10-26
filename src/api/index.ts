@@ -15,3 +15,8 @@ export const findCharacters = async ({
   );
   return response.data;
 };
+
+export const findHomeworld = async (url: string) => {
+  const response = await axios.get(url);
+  return response.data;
+};
