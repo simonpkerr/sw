@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { findCharacters, findHomeworld } from '../api';
 
 const ListItem = ({ character }: { character: any }) => {
@@ -23,6 +23,8 @@ const ListItem = ({ character }: { character: any }) => {
 
 const List = () => {
   const [data, setData] = useState<[]>([]);
+  const [search, setSearch] = useState<string>();
+  const [searchString, setSearchString] = useState<string>('');
   const [pagingControls, setPagingControls] = useState({
     previous: null,
     next: null,
@@ -30,18 +32,34 @@ const List = () => {
   const [page, setPage] = useState(1);
   useEffect(() => {
     const getCharacters = async () => {
-      const { results, previous, next } = await findCharacters({ page });
+      const { results, previous, next } = await findCharacters({
+        page,
+        searchParam: search,
+      });
       setData(results);
       setPagingControls({ previous, next });
     };
 
     getCharacters();
-  }, [page]);
+  }, [page, search]);
+
+  const searchByName = (e: React.MouseEvent) => {
+    setSearch(searchString);
+  };
 
   return (
     <>
       <h2>Star Wars Characters</h2>
       <p>Showing page {page}</p>
+      <label>
+        Search
+        <input
+          type='text'
+          value={searchString}
+          onChange={(e) => setSearchString(e.target.value)}
+        />
+      </label>
+      <button onClick={searchByName}>Search by name</button>
       {data && (
         <ul>
           {data.map((character: any, i: number) => (

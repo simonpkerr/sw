@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import * as api from '../api';
 import List from '.';
 import userEvent from '@testing-library/user-event';
@@ -32,5 +32,13 @@ describe('List', () => {
     expect(api.findCharacters).toBeCalledWith({ page: 1 });
   });
 
-  it('should render the previous page when next is pressed', async () => {});
+  it('should search for specific characters', async () => {
+    fireEvent.change(screen.getByLabelText('Search'), {
+      target: { value: 'luke' },
+    });
+    userEvent.click(screen.getByText('Search by name'));
+    expect(api.findCharacters).toBeCalledWith({ page: 1, searchParam: 'luke' });
+
+    // await waitFor(() => screen.getByText('next'));
+  });
 });
