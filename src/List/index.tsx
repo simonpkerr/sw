@@ -23,24 +23,37 @@ const ListItem = ({ character }: { character: any }) => {
 
 const List = () => {
   const [data, setData] = useState<[]>([]);
+  const [pagingControls, setPagingControls] = useState({
+    previous: null,
+    next: null,
+  });
+  const [page, setPage] = useState(1);
   useEffect(() => {
     const getCharacters = async () => {
-      const { results, previous, next } = await findCharacters();
+      const { results, previous, next } = await findCharacters({ page });
       setData(results);
+      setPagingControls({ previous, next });
     };
 
     getCharacters();
-  }, []);
+  }, [page]);
 
   return (
     <>
       <h2>Star Wars Characters</h2>
+      <p>Showing page {page}</p>
       {data && (
         <ul>
           {data.map((character: any, i: number) => (
             <ListItem character={character} key={i} />
           ))}
         </ul>
+      )}
+      {pagingControls.previous && (
+        <button onClick={() => setPage(page - 1)}>previous</button>
+      )}
+      {pagingControls.next && (
+        <button onClick={() => setPage(page + 1)}>next</button>
       )}
     </>
   );
