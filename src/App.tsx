@@ -10,7 +10,9 @@ function App() {
     <BrowserRouter>
       <nav>
         <NavLink to='/'>Home</NavLink>
-        <NavLink to='/favourites'>Favourites</NavLink>
+        <NavLink to='/favourites' style={{ marginLeft: 20 }}>
+          Favourites
+        </NavLink>
       </nav>
       <main>
         <Switch>

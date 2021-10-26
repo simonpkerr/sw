@@ -32,7 +32,6 @@ const Details = ({ location, favourites, setFavourites }: any) => {
       homeworld: character.homeworld,
     };
     // should check here first to see if item already added
-
     const newFavourites = [...favourites];
     newFavourites.push(favourite);
     setFavourites(newFavourites);

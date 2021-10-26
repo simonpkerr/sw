@@ -1,6 +1,6 @@
 const Favourites = ({ favourites }: { favourites: any }) => (
   <>
-    <div>Favourites list</div>
+    <h1>Favourites list</h1>
     {favourites && favourites.length > 0 ? (
       <ul>
         {favourites.map((f: any, i: number) => (
