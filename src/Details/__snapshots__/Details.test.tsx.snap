@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Details should show the character details, films and starships passed from the list 1`] = `
+<div>
+  <h1>
+    person
+  </h1>
+  <ul>
+    <li>
+      Hair colour: 
+      blue
+    </li>
+    <li>
+      Eye colour: 
+      red
+    </li>
+    <li>
+      Gender: 
+      m
+    </li>
+    <li>
+      Home planet: 
+      tatooine
+    </li>
+  </ul>
+  <h2>
+    Films
+  </h2>
+  <ul>
+    <li>
+      film title 1
+    </li>
+  </ul>
+  <h2>
+    Starships
+  </h2>
+  <ul>
+    <li>
+      starship 1
+    </li>
+  </ul>
+</div>
+`;

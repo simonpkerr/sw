@@ -2,6 +2,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import * as api from '../api';
 import List from '.';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router';
 
 describe('List', () => {
   beforeEach(() => {
@@ -15,7 +16,11 @@ describe('List', () => {
       previous: 'url',
       next: 'url',
     });
-    render(<List />);
+    render(
+      <MemoryRouter>
+        <List />
+      </MemoryRouter>,
+    );
   });
   it('should load the people list', async () => {
     // eslint-disable-next-line testing-library/await-async-utils
